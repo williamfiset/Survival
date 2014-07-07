@@ -5,10 +5,10 @@
 
 
 import pygame
-from object_classes import *
+from Zombie import Zombie
 from Tile import Tile
 
-def AStar(screen, survivor, total_frames, FPS):
+def AStar(survivor, total_frames, FPS):
     
     half = Tile.width / 2
 

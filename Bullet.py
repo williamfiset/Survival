@@ -2,7 +2,9 @@
 
 
 import pygame
+
 from Tile import Tile
+from Zombie import Zombie
 from random import randint 
 
 
@@ -20,6 +22,8 @@ class Bullet(pygame.Rect):
                 'automatic' : (Zombie.health / 6) + 1 }
 
     def __init__(self, x, y, velx, vely, direction, type_):
+
+        print "Exe"
 
         if type_ == 'shotgun' or type_ == 'pistol':
             try:
@@ -56,7 +60,7 @@ class Bullet(pygame.Rect):
         pygame.Rect.__init__(self, x, y, Bullet.width, Bullet.height)
 
         Bullet.List.append(self)
-
+        print "Exe2"
         # draw
         # update
         # collision --> zombies, tiles
@@ -76,7 +80,7 @@ class Bullet(pygame.Rect):
 
     @staticmethod
     def super_massive_jumbo_loop(screen):
-
+        print len(Bullet.List)
         for bullet in Bullet.List:
 
             bullet.x += bullet.velx
@@ -108,136 +112,6 @@ class Bullet(pygame.Rect):
                         Bullet.List.remove(bullet)
                     except:
                         break # if bullet cannot be removed, then GTFO
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

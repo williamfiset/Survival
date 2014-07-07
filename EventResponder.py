@@ -38,7 +38,7 @@
 
 import pygame, sys
 from Tile import Tile
-from object_classes import Bullet
+from Bullet import Bullet
 
 def userInteraction(screen, survivor):
 
@@ -97,6 +97,7 @@ def userInteraction(screen, survivor):
     if keys[pygame.K_LEFT]:
         survivor.rotate('w')
         Bullet(survivor.centerx, survivor.centery, -10, 0, 'w', survivor.get_bullet_type() )
+        print "Created Bullet"
 
     elif keys[pygame.K_RIGHT]:
         survivor.rotate('e')

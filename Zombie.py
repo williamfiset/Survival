@@ -3,105 +3,10 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import pygame
 from Tile import Tile
 from random import randint 
-
+from Character import Character
 
 class Zombie(Character):
 
@@ -113,7 +18,7 @@ class Zombie(Character):
 
     def __init__(self, x, y):
 
-        self.direction = Direction.West
+        self.direction = 'w'
         self.health = Zombie.health
         self.img = Zombie.original_img
         Character.__init__(self, x, y)

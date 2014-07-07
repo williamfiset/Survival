@@ -4,7 +4,7 @@
 
 import pygame
 from Tile import Tile
-from random import randint 
+
 
 
 """

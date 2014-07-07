@@ -2,8 +2,7 @@
 
 import pygame
 from Tile import Tile
-from random import randint 
-
+from Character import Character
 
 
 class Survivor(Character):
