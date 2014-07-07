@@ -3,7 +3,7 @@
 
 
 import pygame
-from Tile import Tile
+from tile import Tile
 
 
 

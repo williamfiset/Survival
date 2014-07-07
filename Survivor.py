@@ -1,8 +1,8 @@
 
 
 import pygame
-from Tile import Tile
-from Character import Character
+from tile import Tile
+from character import Character
 
 
 class Survivor(Character):

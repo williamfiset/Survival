@@ -4,9 +4,9 @@
 
 
 import pygame
-from Tile import Tile
+from tile import Tile
 from random import randint 
-from Character import Character
+from character import Character
 
 class Zombie(Character):
 

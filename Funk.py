@@ -2,38 +2,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import pygame
 
 def text_to_screen(screen, text, x, y, size = 15,
@@ -48,52 +16,4 @@ def text_to_screen(screen, text, x, y, size = 15,
 	except Exception, e:
 		print 'Font Error, saw it coming'
 		raise e
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

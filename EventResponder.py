@@ -1,44 +1,15 @@
 
+"""
 
+The eventResponder module takes care of all user input (mouse & keyboard)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+"""
 
 
 import pygame, sys
-from Tile import Tile
-from Bullet import Bullet
+from tile import Tile
+from bullet import Bullet
+
 
 def userInteraction(screen, survivor):
 
@@ -97,7 +68,6 @@ def userInteraction(screen, survivor):
     if keys[pygame.K_LEFT]:
         survivor.rotate('w')
         Bullet(survivor.centerx, survivor.centery, -10, 0, 'w', survivor.get_bullet_type() )
-        print "Created Bullet"
 
     elif keys[pygame.K_RIGHT]:
         survivor.rotate('e')
@@ -110,66 +80,6 @@ def userInteraction(screen, survivor):
     elif keys[pygame.K_DOWN]:
         survivor.rotate('s')
         Bullet(survivor.centerx, survivor.centery, 0, 10, 's', survivor.get_bullet_type() )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

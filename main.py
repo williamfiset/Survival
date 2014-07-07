@@ -7,27 +7,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 """
 
 William Fiset
@@ -41,13 +20,13 @@ This is the startpoint of the application, build and run to execute program
 
 import pygame, sys, Funk
 
-from Tile import Tile
-from Zombie import Zombie
-from Survivor import Survivor
-from Bullet import Bullet
+from tile import Tile
+from zombie import Zombie
+from survivor import Survivor
+from bullet import Bullet
 
-import EventResponder 
-from AStar import AStar
+import eventResponder 
+from aStar import AStar
 from time import sleep
 
 pygame.init()

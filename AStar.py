@@ -5,8 +5,8 @@
 
 
 import pygame
-from Zombie import Zombie
-from Tile import Tile
+from zombie import Zombie
+from tile import Tile
 
 def AStar(survivor, total_frames, FPS):
     

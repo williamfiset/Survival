@@ -3,8 +3,8 @@
 
 import pygame
 
-from Tile import Tile
-from Zombie import Zombie
+from tile import Tile
+from zombie import Zombie
 from random import randint 
 
 
