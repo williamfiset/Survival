@@ -113,6 +113,12 @@ import pygame
 from tileC import Tile
 from random import randint 
 
+class Direction():
+    East = 'e'
+    West = 'w'
+    North = 'n'
+    South = 's'
+
 class Character(pygame.Rect):
 
     width, height = 32, 32
@@ -171,7 +177,7 @@ class Zombie(Character):
 
     def __init__(self, x, y):
 
-        self.direction = 'w'
+        self.direction = Direction.West
         self.health = Zombie.health
         self.img = Zombie.original_img
         Character.__init__(self, x, y)

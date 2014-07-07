@@ -53,6 +53,7 @@ import pygame, Funk
 class Tile(pygame.Rect):
 
     List = []
+    TILE_SIZE = 32
     width, height = 32, 32
     total_tiles = 1
     H, V = 1, 22 

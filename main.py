@@ -54,22 +54,27 @@ pygame.font.init()
 pygame.mixer.init()
 
 pygame.mixer.music.load('audio/zombie_theme.ogg')
-pygame.mixer.music.play(-1)
+# pygame.mixer.music.play(-1)
 
-screen = pygame.display.set_mode((704, 448)) # 32, 32
+
+SCREEN_WIDTH, SCREEN_HEIGHT = Tile.TILE_SIZE * 22, Tile.TILE_SIZE * 14
+FPS = 20
+
+total_frames = 0
+
+screen   = pygame.display.set_mode(( SCREEN_WIDTH, SCREEN_HEIGHT))
+clock    = pygame.time.Clock()
+dungeon  = pygame.image.load('images/dungeon.jpg')
+survivor = Survivor(Tile.TILE_SIZE * 2, Tile.TILE_SIZE * 4)
 
 Tile.pre_init(screen)
-
-clock = pygame.time.Clock()
-FPS = 20
-total_frames = 0
-dungeon = pygame.image.load('images/dungeon.jpg')
-survivor = Survivor(32 * 2, 32 * 4)
 
 
 while True:
 
-    screen.blit(dungeon, (0,0) )
+    # Drawing to Screen
+
+    screen.blit(dungeon, (0, 0) )
 
     Zombie.spawn(total_frames, FPS)
     Zombie.update(screen, survivor)
@@ -90,9 +95,11 @@ while True:
     total_frames += 1
 
     if survivor.health <= 0:
+
         sleep(2.5)
         screen.blit(pygame.image.load('images/dead.jpg'), (0,0))
         pygame.display.update()
+
         break
 
 sleep(4)
