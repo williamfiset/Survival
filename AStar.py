@@ -4,36 +4,11 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import pygame
 from object_classes import *
 from Tile import Tile
 
-def A_Star(screen, survivor, total_frames, FPS):
+def AStar(screen, survivor, total_frames, FPS):
     
     half = Tile.width / 2
 

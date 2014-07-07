@@ -37,10 +37,10 @@
 
 
 import pygame, sys
-from tileC import Tile
+from Tile import Tile
 from object_classes import Bullet
 
-def interaction(screen, survivor):
+def userInteraction(screen, survivor):
 
     for event in pygame.event.get():
 

@@ -28,25 +28,22 @@
 
 
 
+"""
+
+William Fiset
 
 
+This is the startpoint of the application, build and run to execute program
 
-
-
-
-
-
-
-
-
+"""
 
 
 
 import pygame, sys, Funk
-from tileC import Tile
+from Tile import Tile
 from object_classes import *
-from interaction import interaction
-from A_Star import A_Star
+import EventResponder 
+from AStar import AStar
 from time import sleep
 
 pygame.init()
@@ -54,7 +51,7 @@ pygame.font.init()
 pygame.mixer.init()
 
 pygame.mixer.music.load('audio/zombie_theme.ogg')
-# pygame.mixer.music.play(-1)
+pygame.mixer.music.play(-1)
 
 
 SCREEN_WIDTH, SCREEN_HEIGHT = Tile.TILE_SIZE * 22, Tile.TILE_SIZE * 14
@@ -72,25 +69,30 @@ Tile.pre_init(screen)
 
 while True:
 
-    # Drawing to Screen
+    # USER INPUT
 
-    screen.blit(dungeon, (0, 0) )
+    EventResponder.userInteraction(screen, survivor)
+
+
+    # UPDATE GAME
 
     Zombie.spawn(total_frames, FPS)
     Zombie.update(screen, survivor)
 
     survivor.movement()
 
+    AStar(screen, survivor, total_frames, FPS)
+
+    
+    # RENDING ACTIONS
+
+    screen.blit(dungeon, (0, 0) )
     Bullet.super_massive_jumbo_loop(screen)
-
-    A_Star(screen, survivor, total_frames, FPS)
-    interaction(screen, survivor)
-
     survivor.draw(screen)
-
     Funk.text_to_screen(screen, 'Health: {0}'.format(survivor.health), 0,0)
 
     pygame.display.flip()
+
     clock.tick(FPS)
     total_frames += 1
 
@@ -102,7 +104,7 @@ while True:
 
         break
 
-sleep(4)
+sleep(2.5)
 
 
 

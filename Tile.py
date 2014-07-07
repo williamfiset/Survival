@@ -76,8 +76,8 @@ class Tile(pygame.Rect):
 
     @staticmethod
     def pre_init(screen):
-        for y in range(0, screen.get_height(), 32):
-            for x in range(0, screen.get_width(), 32):
+        for y in range(0, screen.get_height(), Tile.TILE_SIZE):
+            for x in range(0, screen.get_width(), Tile.TILE_SIZE):
                 if Tile.total_tiles in Tile.invalids:
                     Tile(x, y, 'solid')
                 else:
