@@ -82,8 +82,8 @@ class Zombie(Character):
 
                 r = randint(0, 2)
                 sounds = [pygame.mixer.Sound('audio/zs1.ogg'),
-                        pygame.mixer.Sound('audio/zs2.ogg'),
-                        pygame.mixer.Sound('audio/zs3.ogg')]
+                          pygame.mixer.Sound('audio/zs2.ogg'),
+                          pygame.mixer.Sound('audio/zs3.ogg')]
                 sound = sounds[ r ]
                 sound.play()
 

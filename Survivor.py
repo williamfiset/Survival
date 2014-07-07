@@ -2,7 +2,7 @@
 
 import pygame
 from tile import Tile
-from character import Character
+from character import Character, Direction
 
 
 class Survivor(Character):

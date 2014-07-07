@@ -54,7 +54,7 @@ while True:
 
     # USER INPUT
 
-    EventResponder.userInteraction(screen, survivor)
+    eventResponder.userInteraction(screen, survivor)
 
     # UPDATE GAME
 

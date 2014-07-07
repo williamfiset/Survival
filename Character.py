@@ -12,11 +12,20 @@ Direction class is meant to act as an Enum for the different directions you're f
 """
 class Direction():
 
-    East = 'e'
-    West = 'w'
-    North = 'n'
-    South = 's'
+    EAST  = 'e'
+    WEST  = 'w'
+    NORTH = 'n'
+    SOUTH = 's'
 
+"""
+The Character class serves as a base class structure:
+
+Hierarchy:
+
+Character:
+    Zombie
+    Survivor
+"""
 class Character(pygame.Rect):
 
     width, height = 32, 32
