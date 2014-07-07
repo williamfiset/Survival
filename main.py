@@ -18,7 +18,7 @@ This is the startpoint of the application, build and run to execute program
 
 
 
-import pygame, sys, Funk
+import pygame, sys, funk
 
 from tile import Tile
 from zombie import Zombie
@@ -68,7 +68,7 @@ while True:
     Bullet.super_massive_jumbo_loop(screen)
     Zombie.update(screen, survivor)
     survivor.draw(screen)
-    Funk.text_to_screen(screen, 'Health: {0}'.format(survivor.health), 0,0)
+    funk.text_to_screen(screen, 'Health: {0}'.format(survivor.health), 0,0)
 
     pygame.display.flip()
 

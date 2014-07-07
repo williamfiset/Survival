@@ -1,54 +1,7 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-import pygame, Funk
+import pygame, funk
 
 class Tile(pygame.Rect):
 
@@ -106,35 +59,4 @@ class Tile(pygame.Rect):
         for tile in Tile.List:
             if tile.number == number:
                 return tile
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

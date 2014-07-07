@@ -13,9 +13,9 @@ class Bullet(pygame.Rect):
     width, height = 7, 10
     List = []
 
-    imgs = { 'pistol' : pygame.image.load('images/pistol_b.png'),
-            'shotgun' : pygame.image.load('images/shotgun_b.png'),
-            'automatic' : pygame.image.load('images/automatic_b.png') }
+    imgs = { 'pistol' : pygame.image.load('images/weapon/pistol_b.png'),
+            'shotgun' : pygame.image.load('images/weapon/shotgun_b.png'),
+            'automatic' : pygame.image.load('images/weapon/automatic_b.png') }
 
     gun_dmg = {'pistol' : (Zombie.health / 3) + 1,
                 'shotgun' : Zombie.health / 2,

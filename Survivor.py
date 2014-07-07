@@ -7,16 +7,16 @@ from character import Character, Direction
 
 class Survivor(Character):
 
-    guns_img =[pygame.image.load('images/pistol.png'),
-                pygame.image.load('images/shotgun.png'),
-                pygame.image.load('images/automatic.png')]
+    guns_img =[pygame.image.load('images/weapon/pistol.png'),
+                pygame.image.load('images/weapon/shotgun.png'),
+                pygame.image.load('images/weapon/automatic.png')]
 
     def __init__(self, x, y):
 
         self.health = 1000
         self.current = 0 # 0 -> pistol, 1 -> shotgun, 2 -> automatic
         self.direction = 'w'
-        self.img = pygame.image.load('images/survivor_w.png')
+        self.img = pygame.image.load('images/survivor/survivor_w.png')
 
         Character.__init__(self, x, y)
 
@@ -76,7 +76,7 @@ class Survivor(Character):
 
     def rotate(self, direction):
 
-        path = 'images/survivor_'
+        path = 'images/survivor/survivor_'
         png = '.png'
 
         if direction == 'n':
