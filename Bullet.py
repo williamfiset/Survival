@@ -1,6 +1,5 @@
 
 
-
 import pygame
 
 from tile import Tile
@@ -8,26 +7,29 @@ from zombie import Zombie
 from random import randint 
 from character import Direction
 
+__author__ = 'William Fiset'
+
+
 class Bullet(pygame.Rect):
     
     width, height = 7, 10
-    List = []
+    list_ = []
 
     imgs = { 'pistol' : pygame.image.load('images/weapon/pistol_b.png'),
     'shotgun' : pygame.image.load('images/weapon/shotgun_b.png'),
     'automatic' : pygame.image.load('images/weapon/automatic_b.png') }
 
-    gun_dmg = {'pistol' : (Zombie.health / 3) + 1,
-                'shotgun' : Zombie.health / 2,
-                'automatic' : (Zombie.health / 6) + 1 }
+    gun_dmg = {'pistol' : (Zombie.START_HEALTH / 3) + 1,
+                'shotgun' : Zombie.START_HEALTH / 2,
+                'automatic' : (Zombie.START_HEALTH / 6) + 1 }
 
     def __init__(self, x, y, velx, vely, direction, type_):
 
         if type_ == 'shotgun' or type_ == 'pistol':
             try:
                 
-                dx = abs(Bullet.List[-1].x - x)
-                dy = abs(Bullet.List[-1].y - y)
+                dx = abs(Bullet.list_[-1].x - x)
+                dy = abs(Bullet.list_[-1].y - y)
 
                 if dx < 50 and dy < 50 and type_ == 'shotgun':
                     return
@@ -57,7 +59,7 @@ class Bullet(pygame.Rect):
 
         pygame.Rect.__init__(self, x, y, Bullet.width, Bullet.height)
 
-        Bullet.List.append(self)
+        Bullet.list_.append(self)
 
 
     def offscreen(self, screen):
@@ -76,7 +78,7 @@ class Bullet(pygame.Rect):
     @staticmethod
     def super_massive_jumbo_loop(screen):
         
-        for bullet in Bullet.List:
+        for bullet in Bullet.list_:
 
             bullet.x += bullet.velx
             bullet.y += bullet.vely
@@ -84,27 +86,27 @@ class Bullet(pygame.Rect):
             screen.blit(bullet.img, (bullet.x , bullet.y))
 
             if bullet.offscreen(screen):
-                Bullet.List.remove(bullet)
+                Bullet.list_.remove(bullet)
                 continue
 
-            for zombie in Zombie.List:
+            for zombie in Zombie.list_:
                 if bullet.colliderect(zombie):
 
                     """
                     The same bullet cannot be used to kill
                     multiple zombies and as the bullet was 
-                    no longer in Bullet.List error was raised
+                    no longer in Bullet.list_ error was raised
                     """
 
                     zombie.health -= Bullet.gun_dmg[bullet.type]                
-                    Bullet.List.remove(bullet)
+                    Bullet.list_.remove(bullet)
                     break
 
-            for tile in Tile.List:
+            for tile in Tile.list_:
                 
                 if bullet.colliderect(tile) and not(tile.walkable):
                     try:
-                        Bullet.List.remove(bullet)
+                        Bullet.list_.remove(bullet)
                     except:
                         break # if bullet cannot be removed, then GTFO
 

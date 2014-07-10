@@ -6,6 +6,8 @@ import pygame
 from tile import Tile
 
 
+__author__ = 'William Fiset'
+
 
 """
 Direction class is meant to act as an Enum for the different directions you're facing
@@ -30,26 +32,29 @@ Character:
 
 class Character(pygame.Rect):
 
-    width, height = 32, 32
+    WIDTH, HEIGHT = 32, 32
 
     def __init__(self, x, y):
 
         # targetX and targetY are the x & y positions the character is moving towards
         self.targetX, self.targetY = 0, 0
-        self.dy, self.dx =0,0
-        pygame.Rect.__init__(self, x, y, Character.width, Character.height)
+
+        self.dy, self.dx = 0 , 0
+
+        pygame.Rect.__init__(self, x, y, Character.WIDTH, Character.HEIGHT)
 
     def __str__(self):
         return "X: {0}  Y: {1}  dx: {2} dy: {3}".format(self.x, self.y, self.dx, self.dy)
 
     def set_target(self, next_tile):
+
         if not self.isMoving():
             self.dx = next_tile.x
             self.dy = next_tile.y
 
     def get_number(self):
         
-        return ((self.x / self.width) + Tile.H) + ((self.y / self.height) * Tile.V)
+        return ((self.x / self.WIDTH) + Tile.H) + ((self.y / self.HEIGHT) * Tile.V)
 
     def get_tile(self):
 

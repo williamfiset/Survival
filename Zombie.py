@@ -9,27 +9,32 @@ from random import randint
 from character import Character
 from character import Direction
 
+__author__ = 'William Fiset'
+
+
 
 class Zombie(Character):
 
-    List = []
+    ORIGINAL_ZOMBIE_IMAGE = pygame.image.load('images/zombie.png')
+    START_HEALTH = 100
+
+    list_ = []
     spawn_tiles = (9,42,91,134,193,219,274)
-    original_img = pygame.image.load('images/zombie.png')
-    health = 100
-    velocity = 4
+    _velocity = 4
 
     def __init__(self, x, y):
 
         self.direction = Direction.WEST
-        self.health = Zombie.health
-        self.img = Zombie.original_img
+        self.health = Zombie.START_HEALTH
+        self.img = Zombie.ORIGINAL_ZOMBIE_IMAGE
+
         Character.__init__(self, x, y)
-        Zombie.List.append(self)
+        Zombie.list_.append(self)
 
     @staticmethod
     def update(screen, survivor):
 
-        for zombie in Zombie.List:
+        for zombie in Zombie.list_:
             
             screen.blit(zombie.img, (zombie.x, zombie.y))
 
@@ -49,7 +54,7 @@ class Zombie(Character):
                         survivor.health -= 5
 
             if zombie.health <= 0:
-                Zombie.List.remove(zombie)
+                Zombie.list_.remove(zombie)
 
             if zombie.dx != 0 and zombie.dy != 0: # Target is set
 
@@ -57,20 +62,20 @@ class Zombie(Character):
                 Y = zombie.y - zombie.dy
 
                 if X < 0: # --->
-                    zombie.x += Zombie.velocity
-                    zombie.rotate(Direction.EAST, Zombie.original_img)
+                    zombie.x += Zombie._velocity
+                    zombie.rotate(Direction.EAST, Zombie.ORIGINAL_ZOMBIE_IMAGE)
 
                 elif X > 0: # <----
-                    zombie.x -= Zombie.velocity
-                    zombie.rotate(Direction.WEST, Zombie.original_img)
+                    zombie.x -= Zombie._velocity
+                    zombie.rotate(Direction.WEST, Zombie.ORIGINAL_ZOMBIE_IMAGE)
 
                 if Y > 0: # up
-                    zombie.y -= Zombie.velocity
-                    zombie.rotate(Direction.NORTH, Zombie.original_img)
+                    zombie.y -= Zombie._velocity
+                    zombie.rotate(Direction.NORTH, Zombie.ORIGINAL_ZOMBIE_IMAGE)
 
                 elif Y < 0: # dopwn
-                    zombie.y += Zombie.velocity
-                    zombie.rotate(Direction.SOUTH, Zombie.original_img)
+                    zombie.y += Zombie._velocity
+                    zombie.rotate(Direction.SOUTH, Zombie.ORIGINAL_ZOMBIE_IMAGE)
 
                 if X == 0 and Y == 0:
                     zombie.dx, zombie.dy = 0, 0

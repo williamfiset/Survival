@@ -8,6 +8,9 @@ import pygame
 from zombie import Zombie
 from tile import Tile
 
+__author__ = 'William_Fiset'
+
+
 def AStar(survivor, total_frames, FPS):
     
     half = Tile.width / 2
@@ -22,7 +25,7 @@ def AStar(survivor, total_frames, FPS):
     SE = 23
     SW = 21
 
-    for tile in Tile.List:
+    for tile in Tile.list_:
         tile.parent = None
         tile.H, tile.G, tile.F = 0,0,0
 
@@ -72,7 +75,7 @@ def AStar(survivor, total_frames, FPS):
             tile.G = tile.parent.G + 14
 
     def H():
-        for tile in Tile.List:
+        for tile in Tile.list_:
             tile.H = 10 * (abs(tile.x - survivor.x) + abs(tile.y - survivor.y)) / Tile.width
 
     def F(tile):
@@ -141,7 +144,7 @@ def AStar(survivor, total_frames, FPS):
 
         
 
-    for zombie in Zombie.List:
+    for zombie in Zombie.list_:
 
         if zombie.isMoving(): #zombie.dx != 0 or zombie.dy != 0:
             continue

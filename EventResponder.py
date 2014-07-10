@@ -11,6 +11,7 @@ import pygame, sys
 from tile import Tile
 from bullet import Bullet
 
+__author__ = 'William Fiset'
 
 def userInteraction(screen, survivor):
 

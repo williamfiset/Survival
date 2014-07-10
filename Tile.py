@@ -5,7 +5,7 @@ import pygame, funk
 
 class Tile(pygame.Rect):
 
-    List = []
+    list_ = []
     TILE_SIZE = 32
     width, height = 32, 32
     total_tiles = 1
@@ -52,11 +52,11 @@ class Tile(pygame.Rect):
 
         pygame.Rect.__init__(self, (x, y) , (Tile.width, Tile.height) )
 
-        Tile.List.append(self)
+        Tile.list_.append(self)
 
     @staticmethod
     def get_tile(number):
-        for tile in Tile.List:
+        for tile in Tile.list_:
             if tile.number == number:
                 return tile
 

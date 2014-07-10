@@ -5,11 +5,13 @@ Usage:
     python setup.py py2app
 """
 
+__author__ = 'William Fiset'
+
 from setuptools import setup
 
 APP = ['main.py']
 DATA_FILES = [('', ['images']), ('', ['audio'])]
-OPTIONS = {'iconfile':'icon.icns',} # 'argv_emulation': False/True 
+OPTIONS = {'iconfile':'icon.icns',} 
 
 setup(
 

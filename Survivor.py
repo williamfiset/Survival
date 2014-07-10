@@ -5,26 +5,27 @@ The Survivor file contorls the survivor and his or her movement and actions.
 
 """
 
-__author__ = 'William Fiset'
-
-
-
 import pygame
 from tile import Tile
 from character import Character, Direction
 
 
+__author__ = 'William Fiset'
+
+
 class Survivor(Character):
 
-	velocity = 8
+	_velocity = 8
 
-	guns_img = [pygame.image.load('images/weapon/pistol.png'),
-	pygame.image.load('images/weapon/shotgun.png'),
-	pygame.image.load('images/weapon/automatic.png')]
+	GUN_IMAGES = [pygame.image.load('images/weapon/pistol.png'),
+				pygame.image.load('images/weapon/shotgun.png'),
+				pygame.image.load('images/weapon/automatic.png')]
+
+	START_HEALTH = 1000
 
 	def __init__(self, x, y):
 
-		self.health = 1000
+		self.health = Survivor.START_HEALTH
 		self.current = 0 # 0 -> pistol, 1 -> shotgun, 2 -> automatic
 		self.direction = Direction.WEST
 		self.img = pygame.image.load('images/survivor/survivor_w.png')
@@ -45,23 +46,23 @@ class Survivor(Character):
 
 		if self.isMoving(): # Target is set
 
-			xDestination = self.x - self.dx
-			yDestination = self.y - self.dy
+			x_destination = self.x - self.dx
+			y_destination = self.y - self.dy
 
-			if xDestination < 0: # --->
-				self.x += Survivor.velocity
+			if x_destination < 0: # --->
+				self.x += Survivor._velocity
 
-			elif xDestination > 0: # <----
-				self.x -= Survivor.velocity
+			elif x_destination > 0: # <----
+				self.x -= Survivor._velocity
 
 
-			if yDestination > 0: # up
-				self.y -= Survivor.velocity
+			if y_destination > 0: # up
+				self.y -= Survivor._velocity
 
-			elif yDestination < 0: # dopwn
-				self.y += Survivor.velocity
+			elif y_destination < 0: # dopwn
+				self.y += Survivor._velocity
 
-			if xDestination == 0 and yDestination == 0:
+			if x_destination == 0 and y_destination == 0:
 				self.dx, self.dy = 0, 0
 
 
@@ -70,7 +71,7 @@ class Survivor(Character):
 		screen.blit(self.img, (self.x, self.y))
 
 		h = self.width / 2
-		img = Survivor.guns_img[self.current]
+		img = Survivor.GUN_IMAGES[self.current]
 
 		if self.direction == Direction.WEST:
 		    screen.blit(img, (self.x, self.y + h))
