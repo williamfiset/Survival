@@ -6,7 +6,7 @@ import pygame
 from tile import Tile
 from zombie import Zombie
 from random import randint 
-
+from character import Direction
 
 class Bullet(pygame.Rect):
     
@@ -14,8 +14,8 @@ class Bullet(pygame.Rect):
     List = []
 
     imgs = { 'pistol' : pygame.image.load('images/weapon/pistol_b.png'),
-            'shotgun' : pygame.image.load('images/weapon/shotgun_b.png'),
-            'automatic' : pygame.image.load('images/weapon/automatic_b.png') }
+    'shotgun' : pygame.image.load('images/weapon/shotgun_b.png'),
+    'automatic' : pygame.image.load('images/weapon/automatic_b.png') }
 
     gun_dmg = {'pistol' : (Zombie.health / 3) + 1,
                 'shotgun' : Zombie.health / 2,
@@ -42,17 +42,17 @@ class Bullet(pygame.Rect):
         self.direction = direction
         self.velx, self.vely = velx, vely
 
-        if direction == 'n':
+        if direction == Direction.NORTH:
             south = pygame.transform.rotate(Bullet.imgs[type_], 90) # CCW
             self.img = pygame.transform.flip(south, False, True)
 
-        if direction == 's':
+        if direction == Direction.SOUTH:
             self.img = pygame.transform.rotate(Bullet.imgs[type_], 90) # CCW
 
-        if direction == 'e':
+        if direction == Direction.EAST:
             self.img = pygame.transform.flip(Bullet.imgs[type_], True, False)
 
-        if direction == 'w':
+        if direction == Direction.WEST:
             self.img = Bullet.imgs[type_]
 
         pygame.Rect.__init__(self, x, y, Bullet.width, Bullet.height)

@@ -143,7 +143,7 @@ def AStar(survivor, total_frames, FPS):
 
     for zombie in Zombie.List:
 
-        if zombie.tx != None or zombie.ty != None:
+        if zombie.isMoving(): #zombie.dx != 0 or zombie.dy != 0:
             continue
 
         open_list = []

@@ -33,7 +33,7 @@ pygame.init()
 pygame.font.init()
 pygame.mixer.init()
 
-pygame.mixer.music.load('audio/zombie_theme.ogg')
+# pygame.mixer.music.load('audio/zombie_theme.ogg')
 # pygame.mixer.music.play(-1)
 
 

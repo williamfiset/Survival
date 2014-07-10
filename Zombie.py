@@ -7,6 +7,8 @@ import pygame
 from tile import Tile
 from random import randint 
 from character import Character
+from character import Direction
+
 
 class Zombie(Character):
 
@@ -14,11 +16,11 @@ class Zombie(Character):
     spawn_tiles = (9,42,91,134,193,219,274)
     original_img = pygame.image.load('images/zombie.png')
     health = 100
-
+    velocity = 4
 
     def __init__(self, x, y):
 
-        self.direction = 'w'
+        self.direction = Direction.WEST
         self.health = Zombie.health
         self.img = Zombie.original_img
         Character.__init__(self, x, y)
@@ -49,30 +51,29 @@ class Zombie(Character):
             if zombie.health <= 0:
                 Zombie.List.remove(zombie)
 
-            if zombie.tx != None and zombie.ty != None: # Target is set
+            if zombie.dx != 0 and zombie.dy != 0: # Target is set
 
-                X = zombie.x - zombie.tx
-                Y = zombie.y - zombie.ty
+                X = zombie.x - zombie.dx
+                Y = zombie.y - zombie.dy
 
-                vel = 4
                 if X < 0: # --->
-                    zombie.x += vel
-                    zombie.rotate('e', Zombie.original_img)
+                    zombie.x += Zombie.velocity
+                    zombie.rotate(Direction.EAST, Zombie.original_img)
 
                 elif X > 0: # <----
-                    zombie.x -= vel
-                    zombie.rotate('w', Zombie.original_img)
+                    zombie.x -= Zombie.velocity
+                    zombie.rotate(Direction.WEST, Zombie.original_img)
 
                 if Y > 0: # up
-                    zombie.y -= vel
-                    zombie.rotate('n', Zombie.original_img)
+                    zombie.y -= Zombie.velocity
+                    zombie.rotate(Direction.NORTH, Zombie.original_img)
 
                 elif Y < 0: # dopwn
-                    zombie.y += vel
-                    zombie.rotate('s', Zombie.original_img)
+                    zombie.y += Zombie.velocity
+                    zombie.rotate(Direction.SOUTH, Zombie.original_img)
 
                 if X == 0 and Y == 0:
-                    zombie.tx, zombie.ty = None, None
+                    zombie.dx, zombie.dy = 0, 0
  
     @staticmethod
     def spawn(total_frames, FPS):
@@ -85,11 +86,14 @@ class Zombie(Character):
                           pygame.mixer.Sound('audio/zs2.ogg'),
                           pygame.mixer.Sound('audio/zs3.ogg')]
                 sound = sounds[ r ]
-                sound.play()
+                # TURNED OFF SOUND FOR DEBUGGING
+                # sound.play()
 
             r = randint(0, len(Zombie.spawn_tiles) - 1)
             tile_num = Zombie.spawn_tiles[r]
             spawn_node = Tile.get_tile(tile_num)
+
+
             Zombie(spawn_node.x, spawn_node.y)
 
 

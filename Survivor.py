@@ -1,4 +1,13 @@
 
+"""
+
+The Survivor file contorls the survivor and his or her movement and actions.
+
+"""
+
+__author__ = 'William Fiset'
+
+
 
 import pygame
 from tile import Tile
@@ -7,97 +16,106 @@ from character import Character, Direction
 
 class Survivor(Character):
 
-    guns_img =[pygame.image.load('images/weapon/pistol.png'),
-                pygame.image.load('images/weapon/shotgun.png'),
-                pygame.image.load('images/weapon/automatic.png')]
+	velocity = 8
 
-    def __init__(self, x, y):
+	guns_img = [pygame.image.load('images/weapon/pistol.png'),
+	pygame.image.load('images/weapon/shotgun.png'),
+	pygame.image.load('images/weapon/automatic.png')]
 
-        self.health = 1000
-        self.current = 0 # 0 -> pistol, 1 -> shotgun, 2 -> automatic
-        self.direction = 'w'
-        self.img = pygame.image.load('images/survivor/survivor_w.png')
+	def __init__(self, x, y):
 
-        Character.__init__(self, x, y)
+		self.health = 1000
+		self.current = 0 # 0 -> pistol, 1 -> shotgun, 2 -> automatic
+		self.direction = Direction.WEST
+		self.img = pygame.image.load('images/survivor/survivor_w.png')
 
-    def get_bullet_type(self):
+		Character.__init__(self, x, y)
 
-        if self.current == 0:
-            return 'pistol'
-        elif self.current == 1:
-            return 'shotgun'
-        elif self.current == 2:
-            return 'automatic'
+	def get_bullet_type(self):
 
-    def movement(self):
+		if self.current == 0:
+			return 'pistol'
+		elif self.current == 1:
+			return 'shotgun'
+		elif self.current == 2:
+			return 'automatic'
 
-        if self.tx != None and self.ty != None: # Target is set
+	# movement determines if the player should move, and what direction to move in
+	def movement(self):
 
-            X = self.x - self.tx
-            Y = self.y - self.ty
+		if self.isMoving(): # Target is set
 
-            vel = 8
+			xDestination = self.x - self.dx
+			yDestination = self.y - self.dy
 
-            if X < 0: # --->
-                self.x += vel
-            elif X > 0: # <----
-                self.x -= vel
+			if xDestination < 0: # --->
+				self.x += Survivor.velocity
 
-            if Y > 0: # up
-                self.y -= vel
-            elif Y < 0: # dopwn
-                self.y += vel
+			elif xDestination > 0: # <----
+				self.x -= Survivor.velocity
 
-            if X == 0 and Y == 0:
-                self.tx, self.ty = None, None
 
-    def draw(self, screen):
+			if yDestination > 0: # up
+				self.y -= Survivor.velocity
 
-        screen.blit(self.img, (self.x, self.y))
+			elif yDestination < 0: # dopwn
+				self.y += Survivor.velocity
 
-        h = self.width / 2
-        img = Survivor.guns_img[self.current]
+			if xDestination == 0 and yDestination == 0:
+				self.dx, self.dy = 0, 0
 
-        if self.direction == 'w':
-            screen.blit(img, (self.x, self.y + h))
 
-        elif self.direction == 'e':
-            img = pygame.transform.flip(img, True, False)
-            screen.blit(img, (self.x + h, self.y + h))            
+	def draw(self, screen):
 
-        elif self.direction == 's':
-            img = pygame.transform.rotate(img, 90) # CCW
-            screen.blit(img, (self.x + h, self.y + h))            
+		screen.blit(self.img, (self.x, self.y))
 
-        elif self.direction == 'n':
-            south = pygame.transform.rotate(img, 90)
-            img = pygame.transform.flip(south, False, True)
-            screen.blit(img, (self.x + h, self.y - h))
+		h = self.width / 2
+		img = Survivor.guns_img[self.current]
 
-    def rotate(self, direction):
+		if self.direction == Direction.WEST:
+		    screen.blit(img, (self.x, self.y + h))
 
-        path = 'images/survivor/survivor_'
-        png = '.png'
+		elif self.direction == Direction.EAST:
+		    img = pygame.transform.flip(img, True, False)
+		    screen.blit(img, (self.x + h, self.y + h))            
 
-        if direction == 'n':
-            if self.direction != 'n':
-                self.direction = 'n'
-                self.img = pygame.image.load(path + self.direction + png)
+		elif self.direction == Direction.SOUTH:
+		    img = pygame.transform.rotate(img, 90) # CCW
+		    screen.blit(img, (self.x + h, self.y + h))            
 
-        if direction == 's':
-            if self.direction != 's':
-                self.direction = 's'
-                self.img = pygame.image.load(path + self.direction + png)
+		elif self.direction == Direction.NORTH:
+		    south = pygame.transform.rotate(img, 90)
+		    img = pygame.transform.flip(south, False, True)
+		    screen.blit(img, (self.x + h, self.y - h))
 
-        if direction == 'e':
-            if self.direction != 'e':
-                self.direction = 'e'
-                self.img = pygame.image.load(path + self.direction + png)
+	"""
+	changes player direction
+	"""
 
-        if direction == 'w':
-            if self.direction != 'w':
-                self.direction = 'w'
-                self.img = pygame.image.load(path + self.direction + png)
+	def rotate(self, direction):
+
+		path = 'images/survivor/survivor_'
+		png = '.png'
+
+		if direction == Direction.NORTH:
+			if self.direction != Direction.NORTH:
+				self.direction = Direction.NORTH
+				self.img = pygame.image.load(path + self.direction + png)
+
+		if direction == Direction.SOUTH:
+			if self.direction != Direction.SOUTH:
+				self.direction = Direction.SOUTH
+				self.img = pygame.image.load(path + self.direction + png)
+
+		if direction == Direction.EAST:
+			if self.direction != Direction.EAST:
+				self.direction = Direction.EAST
+				self.img = pygame.image.load(path + self.direction + png)
+
+		if direction == Direction.WEST:
+			if self.direction != Direction.WEST:
+				self.direction = Direction.WEST
+				self.img = pygame.image.load(path + self.direction + png)
 
 
 
