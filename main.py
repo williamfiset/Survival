@@ -1,16 +1,8 @@
 
 
-
-
-
-
-
-
-
 """
 
 William Fiset
-
 
 This is the startpoint of the application, build and run to execute program
 
@@ -39,6 +31,8 @@ pygame.mixer.init()
 
 SCREEN_WIDTH, SCREEN_HEIGHT = Tile.TILE_SIZE * 22, Tile.TILE_SIZE * 14
 FPS = 20
+
+PAUSE_TIME = 2.5 # seconds
 
 total_frames = 0
 
@@ -77,13 +71,13 @@ while True:
 
     if survivor.health <= 0:
 
-        sleep(2.5)
+        sleep(PAUSE_TIME)
         screen.blit(pygame.image.load('images/dead.jpg'), (0,0))
         pygame.display.update()
 
         break
 
-sleep(2.5)
+sleep(PAUSE_TIME)
 
 
 
