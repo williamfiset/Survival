@@ -1,16 +1,14 @@
-
-
-
-
-
 import pygame
-from tile import Tile
-from random import randint 
-from character import Character
-from character import Direction
+from Tile import Tile
+from random import randint
+from Character import Character
+from Character import Direction
 
 __author__ = 'William Fiset'
 
+"""
+The Zombie class defines the zombie NPC's for the game
+"""
 
 
 class Zombie(Character):
@@ -19,7 +17,7 @@ class Zombie(Character):
     START_HEALTH = 100
 
     list_ = []
-    spawn_tiles = (9,42,91,134,193,219,274)
+    spawn_tiles = (9, 42, 91, 134, 193, 219, 274)
     _velocity = 4
 
     def __init__(self, x, y):
@@ -35,7 +33,7 @@ class Zombie(Character):
     def update(screen, survivor):
 
         for zombie in Zombie.list_:
-            
+
             screen.blit(zombie.img, (zombie.x, zombie.y))
 
             if survivor.x % Tile.width == 0 and survivor.y % Tile.height == 0:
@@ -43,10 +41,10 @@ class Zombie(Character):
 
                     tn = survivor.get_number()
 
-                    N = tn + -(Tile.V)
-                    S = tn +  (Tile.V)
-                    E = tn +  (Tile.H)
-                    W = tn + -(Tile.H)
+                    N = tn - (Tile.V)
+                    S = tn + (Tile.V)
+                    E = tn + (Tile.H)
+                    W = tn - (Tile.H)
 
                     NSEW = [N, S, E, W, tn]
 
@@ -56,30 +54,30 @@ class Zombie(Character):
             if zombie.health <= 0:
                 Zombie.list_.remove(zombie)
 
-            if zombie.dx != 0 and zombie.dy != 0: # Target is set
+            if zombie.dx != 0 and zombie.dy != 0:  # Target is set
 
                 X = zombie.x - zombie.dx
                 Y = zombie.y - zombie.dy
 
-                if X < 0: # --->
+                if X < 0:  # --->
                     zombie.x += Zombie._velocity
                     zombie.rotate(Direction.EAST, Zombie.ORIGINAL_ZOMBIE_IMAGE)
 
-                elif X > 0: # <----
+                elif X > 0:  # <----
                     zombie.x -= Zombie._velocity
                     zombie.rotate(Direction.WEST, Zombie.ORIGINAL_ZOMBIE_IMAGE)
 
-                if Y > 0: # up
+                if Y > 0:  # up
                     zombie.y -= Zombie._velocity
                     zombie.rotate(Direction.NORTH, Zombie.ORIGINAL_ZOMBIE_IMAGE)
 
-                elif Y < 0: # dopwn
+                elif Y < 0:  # dopwn
                     zombie.y += Zombie._velocity
                     zombie.rotate(Direction.SOUTH, Zombie.ORIGINAL_ZOMBIE_IMAGE)
 
                 if X == 0 and Y == 0:
                     zombie.dx, zombie.dy = 0, 0
- 
+
     @staticmethod
     def spawn(total_frames, FPS):
         if total_frames % (FPS) == 0:
@@ -87,21 +85,17 @@ class Zombie(Character):
             if total_frames % (FPS * 6) == 0:
 
                 r = randint(0, 2)
+                # TURNED OFF SOUND FOR DEBUGGING
+                """
                 sounds = [pygame.mixer.Sound('audio/zs1.ogg'),
                           pygame.mixer.Sound('audio/zs2.ogg'),
                           pygame.mixer.Sound('audio/zs3.ogg')]
                 sound = sounds[ r ]
-                # TURNED OFF SOUND FOR DEBUGGING
-                # sound.play()
+                sound.play()
+                """
 
             r = randint(0, len(Zombie.spawn_tiles) - 1)
             tile_num = Zombie.spawn_tiles[r]
             spawn_node = Tile.get_tile(tile_num)
 
-
             Zombie(spawn_node.x, spawn_node.y)
-
-
-
-
-

@@ -1,19 +1,13 @@
-
-
-
-
-
-
-import pygame
-from zombie import Zombie
-from tile import Tile
+# import pygame  # this is imported, but not used
+from Zombie import Zombie
+from Tile import Tile
 
 __author__ = 'William_Fiset'
 
 
 def AStar(survivor, total_frames, FPS):
-    
-    half = Tile.width / 2
+
+    # half = Tile.width / 2  # this is assigned, but not used
 
     N = -22
     S = 22
@@ -27,7 +21,7 @@ def AStar(survivor, total_frames, FPS):
 
     for tile in Tile.list_:
         tile.parent = None
-        tile.H, tile.G, tile.F = 0,0,0
+        tile.H, tile.G, tile.F = 0, 0, 0
 
     def blocky(tiles, diagonals, surrounding_node):
         if surrounding_node.number not in diagonals:
@@ -35,8 +29,8 @@ def AStar(survivor, total_frames, FPS):
         return tiles
 
     def get_surrounding_tiles(base_node):
-        
-        array =(
+
+        array = (
             (base_node.number + N),
             (base_node.number + NE),
             (base_node.number + E),
@@ -49,24 +43,25 @@ def AStar(survivor, total_frames, FPS):
 
         tiles = []
 
-        onn = base_node.number 
+        onn = base_node.number
         diagonals = [onn + NE, onn + NW, onn + SE, onn + SW]
 
         for tile_number in array:
 
             surrounding_tile = Tile.get_tile(tile_number)
-            
-            if tile_number not in range(1, Tile.total_tiles + 1):
+
+            if tile_number not in list(range(1, Tile.total_tiles + 1)):
                 continue
 
-            if surrounding_tile.walkable and surrounding_tile not in closed_list:
+            if (surrounding_tile.walkable and
+                surrounding_tile not in closed_list):
                 # tiles.append(surrounding_tile) # Diagonal movement
                 tiles = blocky(tiles, diagonals, surrounding_tile)
 
         return tiles
 
     def G(tile):
-        
+
         diff = tile.number - tile.parent.number
 
         if diff in (N, S, E, W):
@@ -76,7 +71,9 @@ def AStar(survivor, total_frames, FPS):
 
     def H():
         for tile in Tile.list_:
-            tile.H = 10 * (abs(tile.x - survivor.x) + abs(tile.y - survivor.y)) / Tile.width
+            absX = abs(tile.x - survivor.x)
+            absY = abs(tile.y - survivor.y)
+            tile.H = 10 * (absX + absY) / Tile.width
 
     def F(tile):
         # F = G + H
@@ -86,7 +83,7 @@ def AStar(survivor, total_frames, FPS):
         open_list.remove(tile)
         closed_list.append(tile)
 
-    def get_LFT(): # get Lowest F Value
+    def get_LFT():  # get Lowest F Value
 
         F_Values = []
         for tile in open_list:
@@ -112,7 +109,7 @@ def AStar(survivor, total_frames, FPS):
 
     def loop():
 
-        LFT = get_LFT() 
+        LFT = get_LFT()
 
         swap(LFT)
         surrounding_nodes = get_surrounding_tiles(LFT)
@@ -125,7 +122,7 @@ def AStar(survivor, total_frames, FPS):
                 node.parent = LFT
 
             elif node in open_list:
-                
+
                 calculated_G = move_to_G_cost(LFT, node)
                 if calculated_G < node.G:
 
@@ -142,11 +139,11 @@ def AStar(survivor, total_frames, FPS):
 
         loop()
 
-        
+    #TODO: add relevant comment here
 
     for zombie in Zombie.list_:
 
-        if zombie.isMoving(): #zombie.dx != 0 or zombie.dy != 0:
+        if zombie.isMoving():  # zombie.dx != 0 or zombie.dy != 0:
             continue
 
         open_list = []
@@ -159,7 +156,7 @@ def AStar(survivor, total_frames, FPS):
 
         for node in surrounding_nodes:
             node.parent = zombie_tile
-            open_list.append(node)      
+            open_list.append(node)
 
         swap(zombie_tile)
 
@@ -167,7 +164,7 @@ def AStar(survivor, total_frames, FPS):
 
         for node in surrounding_nodes:
             G(node)
-            F(node) 
+            F(node)
 
         loop()
 
@@ -181,7 +178,7 @@ def AStar(survivor, total_frames, FPS):
 
             parent = parent.parent
 
-            if parent == None:
+            if parent is None:
                 break
 
             if parent.number == zombie.get_number():
@@ -190,145 +187,3 @@ def AStar(survivor, total_frames, FPS):
         if len(return_tiles) > 1:
             next_tile = return_tiles[-1]
             zombie.set_target(next_tile)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
