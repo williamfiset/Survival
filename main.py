@@ -14,7 +14,7 @@ from Survivor import Survivor
 from Bullet import Bullet
 from AStar import AStar
 from time import sleep
-
+from mapMaker import MapMaker
 
 __author__ = 'William Fiset'
 
