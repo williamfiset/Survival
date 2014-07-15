@@ -14,7 +14,8 @@ from Survivor import Survivor
 from Bullet import Bullet
 from AStar import AStar
 from time import sleep
-from mapMaker import MapMaker
+import worldCreator
+
 
 __author__ = 'William Fiset'
 
@@ -45,9 +46,8 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 clock = pygame.time.Clock()
 survivor = Survivor(Tile.TILE_SIZE * 2, Tile.TILE_SIZE * 4)
 
-# Sets up game grid by creating the tiles
-# Tile.pre_init(screen)
-MapMaker("map.txt")
+# Creates a world from the text file called map.txt
+worldCreator.create_world("map.txt")
 
 
 # Displays the 'zombies ate your brain credits'
