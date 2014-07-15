@@ -46,7 +46,8 @@ clock = pygame.time.Clock()
 survivor = Survivor(Tile.TILE_SIZE * 2, Tile.TILE_SIZE * 4)
 
 # Sets up game grid by creating the tiles
-Tile.pre_init(screen)
+# Tile.pre_init(screen)
+MapMaker("map.txt")
 
 
 # Displays the 'zombies ate your brain credits'
@@ -58,6 +59,8 @@ def display_end_game_screen():
     # Actually updates the screen
     pygame.display.update()
 
+floor_img = pygame.image.load('images/tiles/surface_tile_gray.png')
+wall_img = pygame.image.load("images/tiles/dark_wall.png")
 
 while survivor.health > 0:
 
@@ -73,7 +76,13 @@ while survivor.health > 0:
 
     # RENDING ACTIONS
 
-    screen.blit(DUNGEON_IMAGE, (0, 0))
+    # screen.blit(DUNGEON_IMAGE, (0, 0))
+    for tile in Tile.list_:
+        if tile.type == Tile.Type.FLOOR:
+            screen.blit(floor_img, (tile.x, tile.y))
+        elif tile.type == Tile.Type.WALL:
+            screen.blit(wall_img, (tile.x, tile.y)) 
+
     Bullet.super_massive_jumbo_loop(screen)
     Zombie.update(screen, survivor)
     survivor.draw(screen)

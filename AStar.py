@@ -80,8 +80,10 @@ def AStar(survivor, total_frames, FPS):
         tile.F = tile.G + tile.H
 
     def swap(tile):
+        
         open_list.remove(tile)
         closed_list.append(tile)
+
 
     def get_LFT():  # get Lowest F Value
 

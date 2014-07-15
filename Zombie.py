@@ -17,7 +17,7 @@ class Zombie(Character):
     START_HEALTH = 100
 
     list_ = []
-    spawn_tiles = (9, 42, 91, 134, 193, 219, 274)
+    spawn_tiles = [] # (24 , 26) # (9, 42, 91, 134, 193, 219, 274)
     _velocity = 4
 
     def __init__(self, x, y):
