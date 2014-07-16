@@ -20,3 +20,8 @@ Please note that modications should follow these coding guidelines:
 https://github.com/william-fiset/Survival/wiki/Coding-Conventions
 https://github.com/william-fiset/Survival/wiki/Coding-Philosophy
 
+
+If you're new to GitHub but want to contribute anyways I suggest  you start looking at an
+oneline tutorial such as this one to get you started:
+
+http://rypress.com/tutorials/git/index.html
