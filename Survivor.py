@@ -19,6 +19,7 @@ class Survivor(Character):
                 pygame.image.load('images/weapon/shotgun.png'),
                 pygame.image.load('images/weapon/automatic.png')]
 
+    NUMBER_OF_GUNS = len(GUN_IMAGES)
     START_HEALTH = 1000
 
     def __init__(self, x, y):
@@ -30,7 +31,7 @@ class Survivor(Character):
 
         Character.__init__(self, x, y)
 
-    def get_bullet_type(self):
+    def get_bullet_type_based_on_weapon(self):
 
         if self.current == 0:
             return 'pistol'
@@ -89,10 +90,7 @@ class Survivor(Character):
             img = pygame.transform.flip(south, False, True)
             screen.blit(img, (self.x + h, self.y - h))
 
-    """
-    changes player direction
-    """
-
+    """ Changes player direction iamge"""
     def rotate(self, direction):
 
         path = 'images/survivor/survivor_'
@@ -117,3 +115,9 @@ class Survivor(Character):
             if self.direction != Direction.WEST:
                 self.direction = Direction.WEST
                 self.img = pygame.image.load(path + self.direction + png)
+
+    def cycle_weapon(self):
+
+        self.current += 1
+        self.current %= Survivor.NUMBER_OF_GUNS
+

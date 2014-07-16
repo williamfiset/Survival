@@ -17,11 +17,11 @@ class Bullet(pygame.Rect):
 
     LAST_BULLET_INDEX = -1
 
-    imgs = {'pistol': pygame.image.load('images/weapon/pistol_b.png'),
+    _weapon_bullet_images = {'pistol': pygame.image.load('images/weapon/pistol_b.png'),
     'shotgun': pygame.image.load('images/weapon/shotgun_b.png'),
     'automatic': pygame.image.load('images/weapon/automatic_b.png')}
 
-    gun_dmg = {'pistol': (Zombie.START_HEALTH / 3) + 1,
+    _gun_damage = {'pistol': (Zombie.START_HEALTH / 3) + 1,
                 'shotgun': Zombie.START_HEALTH / 2,
                 'automatic': (Zombie.START_HEALTH / 6) + 1}
 
@@ -72,17 +72,17 @@ class Bullet(pygame.Rect):
     def __rotation_transformation(self, direction, type_):
                 
         if direction == Direction.NORTH:
-            south = pygame.transform.rotate(Bullet.imgs[type_], 90)  # CCW
+            south = pygame.transform.rotate(Bullet._weapon_bullet_images[type_], 90)  # CCW
             self.img = pygame.transform.flip(south, False, True)
 
         elif direction == Direction.SOUTH:
-            self.img = pygame.transform.rotate(Bullet.imgs[type_], 90)  # CCW
+            self.img = pygame.transform.rotate(Bullet._weapon_bullet_images[type_], 90)  # CCW
 
         elif direction == Direction.EAST:
-            self.img = pygame.transform.flip(Bullet.imgs[type_], True, False)
+            self.img = pygame.transform.flip(Bullet._weapon_bullet_images[type_], True, False)
 
         elif direction == Direction.WEST:
-            self.img = Bullet.imgs[type_]
+            self.img = Bullet._weapon_bullet_images[type_]
 
     # Returns a boolean value on whether or not the bullet is off the screen
     def offscreen(self, screen):
@@ -118,7 +118,7 @@ class Bullet(pygame.Rect):
             for zombie in Zombie.list_:
                 if bullet.colliderect(zombie):
 
-                    zombie.health -= Bullet.gun_dmg[bullet.type]
+                    zombie.health -= Bullet._gun_damage[bullet.type]
                     Bullet.list_.remove(bullet)
                     break
 

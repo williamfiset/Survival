@@ -33,13 +33,14 @@ def create_world(world_text_file):
 				elif character == Tile.Type.FLOOR:
 					Tile(row * Tile.TILE_SIZE, column * Tile.TILE_SIZE, Tile.Type.FLOOR)
 
+				# Marks a zombie spawn tile
 				elif character == Zombie.SPAWN_ZONE:
 					Zombie.spawn_tiles.append(Tile.total_tiles)
 					Tile(row * Tile.TILE_SIZE, column * Tile.TILE_SIZE, Tile.Type.FLOOR)
 				
 				else:
-
-					raise CharacterNotDefined("\n\nCharacter '{0}' is not defined in Tile.Type.* \n".format(character))
+					errorStr = "\n\nCharacter '{0}' is not defined in Tile.Type.* \n"
+					raise CharacterNotDefined(errorStr.format(character))
 
 	
 	except Exception, error:

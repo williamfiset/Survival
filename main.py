@@ -76,7 +76,7 @@ while survivor.health > 0:
 
     # RENDING ACTIONS
 
-    # screen.blit(DUNGEON_IMAGE, (0, 0))
+    # draws either a Floor or a Wall tile
     for tile in Tile.list_:
         if tile.type == Tile.Type.FLOOR:
             screen.blit(floor_img, (tile.x, tile.y))

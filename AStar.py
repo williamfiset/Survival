@@ -91,6 +91,7 @@ def AStar(survivor, total_frames, FPS):
         for tile in open_list:
             F_Values.append(tile.F)
 
+        # Reverse List
         o = open_list[::-1]
 
         for tile in o:

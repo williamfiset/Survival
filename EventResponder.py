@@ -27,10 +27,11 @@ class EventResponder:
 
             if event.type == pygame.KEYDOWN:
 
+                # Press 'e' to cycle character weapon
                 if event.key == pygame.K_e:
-
-                    survivor.current += 1
-                    survivor.current %= 3
+                    
+                    # Change weapon
+                    survivor.cycle_weapon()
 
         # Grab a list containing all the pressed keys
         keys = pygame.key.get_pressed()
@@ -90,22 +91,22 @@ class EventResponder:
         if keys[pygame.K_LEFT]:
             survivor.rotate(Direction.WEST)
             Bullet(survivor.centerx, survivor.centery, -10, 0,
-                Direction.WEST, survivor.get_bullet_type())
+                Direction.WEST, survivor.get_bullet_type_based_on_weapon())
 
         elif keys[pygame.K_RIGHT]:
             survivor.rotate(Direction.EAST)
             Bullet(survivor.centerx, survivor.centery, 10, 0,
-                Direction.EAST, survivor.get_bullet_type())
+                Direction.EAST, survivor.get_bullet_type_based_on_weapon())
 
         elif keys[pygame.K_UP]:
             survivor.rotate(Direction.NORTH)
             Bullet(survivor.centerx, survivor.centery, 0, -10,
-                Direction.NORTH, survivor.get_bullet_type())
+                Direction.NORTH, survivor.get_bullet_type_based_on_weapon())
 
         elif keys[pygame.K_DOWN]:
             survivor.rotate(Direction.SOUTH)
             Bullet(survivor.centerx, survivor.centery, 0, 10,
-                Direction.SOUTH, survivor.get_bullet_type())
+                Direction.SOUTH, survivor.get_bullet_type_based_on_weapon())
 
 
 
