@@ -28,8 +28,7 @@ class Zombie(Character):
         self.health = Zombie.START_HEALTH
         self.img = Zombie.ORIGINAL_ZOMBIE_IMAGE
 
-        # Character.__init__(self, x, y)
-        super(Character, self).__init__(x, y)
+        Character.__init__(self, x, y)
         Zombie.list_.append(self)
 
     @staticmethod
