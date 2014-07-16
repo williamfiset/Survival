@@ -8,7 +8,7 @@ from Character import Character
 from Character import Direction
 
 
-__author__ = 'William Fiset'
+__author__ = 'William Fiset, Alex Mason'
 
 
 class Survivor(Character):

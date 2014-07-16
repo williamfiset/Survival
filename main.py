@@ -17,7 +17,7 @@ from time import sleep
 import worldCreator
 
 
-__author__ = 'William Fiset'
+__author__ = 'William Fiset, Alex Mason'
 
 
 # Initialize pygame

@@ -2,10 +2,9 @@ import pygame
 
 from Tile import Tile
 from Zombie import Zombie
-# from random import randint  # imported, but not used
 from Character import Direction
 
-__author__ = 'William Fiset'
+__author__ = 'William Fiset, Alex Mason'
 
 
 class Bullet(pygame.Rect):
@@ -69,26 +68,7 @@ class Bullet(pygame.Rect):
 
         return True
 
-
-        # if gun_type == 'shotgun' or gun_type == 'pistol':
-        #     try:
-
-        #         last_item = -1
-        #         dx = abs( Bullet.list_[last_item].x - x )
-        #         dy = abs( Bullet.list_[last_item].y - y )
-
-        #         if dx < 50 and dy < 50 and gun_type == 'shotgun':
-        #             return True
-
-        #         if dx < 30 and dy < 30 and gun_type == 'pistol':
-        #             return True
-
-        #     except:
-        #         return False
-
-        # return False
-
-    # Change the direction of the bullet
+    # Change the image direction of the bullet
     def __rotation_transformation(self, direction, type_):
                 
         if direction == Direction.NORTH:
@@ -123,35 +103,36 @@ class Bullet(pygame.Rect):
 
         for bullet in Bullet.list_:
 
+            # update bullet position
             bullet.x += bullet.velx
             bullet.y += bullet.vely
 
+            # draw bullet on screen
             screen.blit(bullet.img, (bullet.x, bullet.y))
 
             if bullet.offscreen(screen):
                 Bullet.list_.remove(bullet)
                 continue
 
+            # Check if any bullet has hit a zombie
             for zombie in Zombie.list_:
                 if bullet.colliderect(zombie):
-
-                    """
-                    The same bullet cannot be used to kill
-                    multiple zombies and as the bullet was
-                    no longer in Bullet.list_ error was raised
-                    """
 
                     zombie.health -= Bullet.gun_dmg[bullet.type]
                     Bullet.list_.remove(bullet)
                     break
 
+            # Check if a bullet has hit a wall 
             for tile in Tile.list_:
 
                 if bullet.colliderect(tile) and not(tile.walkable):
+
+                    # I think the try block is because we might have already removed this bullet 
+                    # when it hit a zombie? 
                     try:
                         Bullet.list_.remove(bullet)
                     except:
-                        break  # if bullet cannot be removed, then GTFO
+                        break  
 
 
                     

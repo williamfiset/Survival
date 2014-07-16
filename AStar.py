@@ -2,7 +2,7 @@
 from Zombie import Zombie
 from Tile import Tile
 
-__author__ = 'William_Fiset'
+__author__ = 'William_Fiset, Alex Mason'
 
 
 def AStar(survivor, total_frames, FPS):
