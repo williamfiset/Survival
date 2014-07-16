@@ -72,7 +72,7 @@ class Bullet(pygame.Rect):
             return True
         elif self.y + self.height > screen.get_height(): # down
             return True
-            
+
         return False 
 
     @staticmethod
@@ -109,3 +109,6 @@ class Bullet(pygame.Rect):
                         Bullet.list_.remove(bullet)
                     except:
                         break  # if bullet cannot be removed, then GTFO
+
+
+                    
