@@ -83,7 +83,7 @@ while survivor.health > 0:
         elif tile.type == Tile.Type.WALL:
             screen.blit(wall_img, (tile.x, tile.y)) 
 
-    Bullet.super_massive_jumbo_loop(screen)
+    Bullet.update(screen)
     Zombie.update(screen, survivor)
     survivor.draw(screen)
     Funk.text_to_screen(screen, 'Health: {0}'.format(survivor.health), 0, 0)

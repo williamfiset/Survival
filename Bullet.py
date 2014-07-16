@@ -43,7 +43,15 @@ class Bullet(pygame.Rect):
         self.direction = direction
         self.velx, self.vely = velx, vely
 
-        # Change the direction of the bullet
+        self.__rotation_transformation(direction, type_)
+
+        
+        pygame.Rect.__init__(self, x, y, Bullet.width, Bullet.height)
+        Bullet.list_.append(self)
+
+    # Change the direction of the bullet
+    def __rotation_transformation(self, direction, type_):
+                
         if direction == Direction.NORTH:
             south = pygame.transform.rotate(Bullet.imgs[type_], 90)  # CCW
             self.img = pygame.transform.flip(south, False, True)
@@ -56,10 +64,6 @@ class Bullet(pygame.Rect):
 
         elif direction == Direction.WEST:
             self.img = Bullet.imgs[type_]
-
-        pygame.Rect.__init__(self, x, y, Bullet.width, Bullet.height)
-
-        Bullet.list_.append(self)
 
     # Returns a boolean value on whether or not the bullet is off the screen
     def offscreen(self, screen):
@@ -76,7 +80,7 @@ class Bullet(pygame.Rect):
         return False 
 
     @staticmethod
-    def super_massive_jumbo_loop(screen):
+    def update(screen):
 
         for bullet in Bullet.list_:
 
