@@ -26,8 +26,9 @@ class Bullet(pygame.Rect):
         if type_ == 'shotgun' or type_ == 'pistol':
             try:
 
-                dx = abs(Bullet.list_[-1].x - x)
-                dy = abs(Bullet.list_[-1].y - y)
+                last_item = -1
+                dx = abs( Bullet.list_[last_item].x - x )
+                dy = abs( Bullet.list_[last_item].y - y )
 
                 if dx < 50 and dy < 50 and type_ == 'shotgun':
                     return
@@ -42,34 +43,37 @@ class Bullet(pygame.Rect):
         self.direction = direction
         self.velx, self.vely = velx, vely
 
+        # Change the direction of the bullet
         if direction == Direction.NORTH:
             south = pygame.transform.rotate(Bullet.imgs[type_], 90)  # CCW
             self.img = pygame.transform.flip(south, False, True)
 
-        if direction == Direction.SOUTH:
+        elif direction == Direction.SOUTH:
             self.img = pygame.transform.rotate(Bullet.imgs[type_], 90)  # CCW
 
-        if direction == Direction.EAST:
+        elif direction == Direction.EAST:
             self.img = pygame.transform.flip(Bullet.imgs[type_], True, False)
 
-        if direction == Direction.WEST:
+        elif direction == Direction.WEST:
             self.img = Bullet.imgs[type_]
 
         pygame.Rect.__init__(self, x, y, Bullet.width, Bullet.height)
 
         Bullet.list_.append(self)
 
+    # Returns a boolean value on whether or not the bullet is off the screen
     def offscreen(self, screen):
 
-        if self.x < 0:
+        if self.x < 0: # left side
             return True
-        elif self.y < 0:
+        elif self.y < 0: # up
             return True
-        elif self.x + self.width > screen.get_width():  # -->
+        elif self.x + self.width > screen.get_width():  # right edge
             return True
-        elif self.y + self.height > screen.get_height():
+        elif self.y + self.height > screen.get_height(): # down
             return True
-        return False
+            
+        return False 
 
     @staticmethod
     def super_massive_jumbo_loop(screen):
