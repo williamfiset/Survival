@@ -13,6 +13,11 @@ class Bullet(pygame.Rect):
     width, height = 7, 10
     list_ = []
 
+    SHOTGUN_BULLET_DISTANCE = 50
+    PISTOL_BULLET_DISTANCE  = 30
+
+    LAST_BULLET_INDEX = -1
+
     imgs = {'pistol': pygame.image.load('images/weapon/pistol_b.png'),
     'shotgun': pygame.image.load('images/weapon/shotgun_b.png'),
     'automatic': pygame.image.load('images/weapon/automatic_b.png')}
@@ -23,31 +28,65 @@ class Bullet(pygame.Rect):
 
     def __init__(self, x, y, velx, vely, direction, type_):
 
-        if type_ == 'shotgun' or type_ == 'pistol':
-            try:
+        # Restricts the firing rate of the shotgun and the pistol
+        if Bullet.__firing_rate_check(x, y, type_):
 
-                last_item = -1
-                dx = abs( Bullet.list_[last_item].x - x )
-                dy = abs( Bullet.list_[last_item].y - y )
+            self.type = type_
+            self.direction = direction
+            self.velx, self.vely = velx, vely
 
-                if dx < 50 and dy < 50 and type_ == 'shotgun':
-                    return
+            self.__rotation_transformation(direction, type_)
 
-                if dx < 30 and dy < 30 and type_ == 'pistol':
-                    return
+            pygame.Rect.__init__(self, x, y, Bullet.width, Bullet.height)
+            Bullet.list_.append(self)
 
-            except:
-                pass
 
-        self.type = type_
-        self.direction = direction
-        self.velx, self.vely = velx, vely
+    # Check if the last bullet fired was far enough from the 
+    # previous bullet to shoot another one
+    @staticmethod
+    def __firing_rate_check(x, y, gun_type):
 
-        self.__rotation_transformation(direction, type_)
+        # We have some existing bullets
+        if len(Bullet.list_) > 0:
 
-        
-        pygame.Rect.__init__(self, x, y, Bullet.width, Bullet.height)
-        Bullet.list_.append(self)
+            # Get the x & y differences to the last bullet created
+            dx = abs( Bullet.list_[Bullet.LAST_BULLET_INDEX].x - x )
+            dy = abs( Bullet.list_[Bullet.LAST_BULLET_INDEX].y - y )
+
+            # Since the Bullet is either moving in the x or y plane, thus either dy or dx will be zero.
+            # Grab whichever is NOT zero
+            distance_to_last_bullet = max(dy, dx)
+            
+            if gun_type == 'shotgun':
+                          
+                if distance_to_last_bullet < Bullet.SHOTGUN_BULLET_DISTANCE:
+                    return False
+
+            elif gun_type == 'pistol':
+
+                if distance_to_last_bullet < Bullet.PISTOL_BULLET_DISTANCE:
+                    return False
+
+        return True
+
+
+        # if gun_type == 'shotgun' or gun_type == 'pistol':
+        #     try:
+
+        #         last_item = -1
+        #         dx = abs( Bullet.list_[last_item].x - x )
+        #         dy = abs( Bullet.list_[last_item].y - y )
+
+        #         if dx < 50 and dy < 50 and gun_type == 'shotgun':
+        #             return True
+
+        #         if dx < 30 and dy < 30 and gun_type == 'pistol':
+        #             return True
+
+        #     except:
+        #         return False
+
+        # return False
 
     # Change the direction of the bullet
     def __rotation_transformation(self, direction, type_):
