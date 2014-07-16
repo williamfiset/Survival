@@ -12,7 +12,9 @@ The Zombie class defines a zombie NPC for this game
 
 class Zombie(Character):
 
+    # Character definition in map.txt
     SPAWN_ZONE = "!"
+
     ORIGINAL_ZOMBIE_IMAGE = pygame.image.load('images/zombie.png')
     START_HEALTH = 100
 
@@ -26,7 +28,8 @@ class Zombie(Character):
         self.health = Zombie.START_HEALTH
         self.img = Zombie.ORIGINAL_ZOMBIE_IMAGE
 
-        Character.__init__(self, x, y)
+        # Character.__init__(self, x, y)
+        super(Character, self).__init__(x, y)
         Zombie.list_.append(self)
 
     @staticmethod
@@ -88,8 +91,10 @@ class Zombie(Character):
     @staticmethod
     def spawn(total_frames, FPS):
         
+        # spawn a new zombie every FPS frames
         if total_frames % (FPS) == 0:
 
+            # Perform a sound effect somewhat periodically 
             if total_frames % (FPS * 6) == 0:
 
                 random_sound_effect = randint(0, 2)
