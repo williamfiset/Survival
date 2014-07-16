@@ -9,7 +9,7 @@ Contributing
 
 If you would like to contribute to this project, please do the following:
 
-1. Fork the plugin repository.
+1. Fork the repository.
 2. Create a separate topic branch created from the latest master.
 3. Commit and push the topic branch.
 4. Make a pull request.
