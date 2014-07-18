@@ -73,7 +73,7 @@ def AStar(survivor, total_frames, FPS):
         for tile in Tile.list_:
             absX = abs(tile.x - survivor.x)
             absY = abs(tile.y - survivor.y)
-            tile.H = 10 * (absX + absY) / Tile.width
+            tile.H = 10 * (absX + absY) / Tile.TILE_SIZE
 
     def F(tile):
         # F = G + H

@@ -4,12 +4,12 @@ from Tile import Tile
 from Zombie import Zombie
 from Character import Direction
 
-__author__ = 'William Fiset, Alex Mason'
+__author__ = 'William Fiset, Alex Mason, Gabriel Antao'
 
 
 class Bullet(pygame.Rect):
-    # Why this default widht and height values here?
-    width, height = 7, 10
+    # Why this default width and height values here?
+    # width, height = 7, 10
     list_ = []
 
     SHOTGUN_BULLET_DISTANCE = 50

@@ -40,8 +40,8 @@ class Zombie(Character):
             screen.blit(zombie.img, (zombie.x, zombie.y))
 
 
-            if survivor.x % Tile.width == 0 and survivor.y % Tile.height == 0:
-                if zombie.x % Tile.width == 0 and zombie.y % Tile.height == 0:
+            if survivor.x % Tile.TILE_SIZE == 0 and survivor.y % Tile.TILE_SIZE == 0:
+                if zombie.x % Tile.TILE_SIZE == 0 and zombie.y % Tile.TILE_SIZE == 0:
 
                     survivor_tile_number = survivor.get_number()
 

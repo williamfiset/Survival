@@ -25,15 +25,20 @@ pygame.init()
 pygame.font.init()
 pygame.mixer.init()
 
+pygame.display.set_caption("Zombie - Survival")
 
 # Startup game theme
 # pygame.mixer.music.load('audio/zombie_theme.ogg')
 # pygame.mixer.music.play(-1)
 
+# Creates a world from the text file called map.txt
+worldCreator.create_world("map.txt")
 
 # Global Game constants
 SCREEN_WIDTH = Tile.TILE_SIZE * 22
 SCREEN_HEIGHT = Tile.TILE_SIZE * 14
+WORLD_WIDTH, WORLD_HEIGHT = worldCreator.get_dimension()
+
 
 # Local constants
 DUNGEON_IMAGE = pygame.image.load('images/dungeon.jpg')
@@ -46,8 +51,6 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 clock = pygame.time.Clock()
 survivor = Survivor(Tile.TILE_SIZE * 2, Tile.TILE_SIZE * 4)
 
-# Creates a world from the text file called map.txt
-worldCreator.create_world("map.txt")
 
 
 # Displays the 'zombies ate your brain credits'

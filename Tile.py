@@ -17,7 +17,6 @@ class Tile(pygame.Rect):
 
     list_ = []
     TILE_SIZE     = 32
-    width, height = 32, 32
     total_tiles   = 1
     H, V          = 1, 22
 
@@ -37,7 +36,7 @@ class Tile(pygame.Rect):
         elif tileType == Tile.Type.WALL:
             self.walkable = False
         
-        pygame.Rect.__init__(self, (x, y), (Tile.width, Tile.height))
+        pygame.Rect.__init__(self, (x, y), (Tile.TILE_SIZE, Tile.TILE_SIZE))
         Tile.list_.append(self)
         Tile.total_tiles += 1
 
@@ -46,3 +45,14 @@ class Tile(pygame.Rect):
         for tile in Tile.list_:
             if tile.number == number:
                 return tile
+
+
+
+
+
+
+
+
+
+
+
