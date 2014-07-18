@@ -41,7 +41,6 @@ WORLD_WIDTH, WORLD_HEIGHT = worldCreator.get_dimension()
 
 
 # Local constants
-DUNGEON_IMAGE = pygame.image.load('images/dungeon.jpg')
 PAUSE_TIME = 2.5  # seconds
 FPS = 20
 
