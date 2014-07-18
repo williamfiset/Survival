@@ -3,7 +3,6 @@ The Survivor file contorls the survivor and his or her movement and actions.
 """
 
 import pygame
-# from tile import Tile  # imported, but not used
 from Character import Character
 from Character import Direction
 
@@ -25,7 +24,7 @@ class Survivor(Character):
     def __init__(self, x, y):
 
         self.health = Survivor.START_HEALTH
-        self.current = 0  # 0 -> pistol, 1 -> shotgun, 2 -> automatic
+        self.current_weapon = 0  # 0 -> pistol, 1 -> shotgun, 2 -> automatic
         self.direction = Direction.WEST
         self.img = pygame.image.load('images/survivor/survivor_w.png')
 
@@ -33,11 +32,11 @@ class Survivor(Character):
 
     def get_bullet_type_based_on_weapon(self):
 
-        if self.current == 0:
+        if self.current_weapon == 0:
             return 'pistol'
-        elif self.current == 1:
+        elif self.current_weapon == 1:
             return 'shotgun'
-        elif self.current == 2:
+        elif self.current_weapon == 2:
             return 'automatic'
 
     """
@@ -72,7 +71,7 @@ class Survivor(Character):
         screen.blit(self.img, (self.x, self.y))
 
         h = self.width / 2
-        img = Survivor.GUN_IMAGES[self.current]
+        img = Survivor.GUN_IMAGES[self.current_weapon]
 
         if self.direction == Direction.WEST:
             screen.blit(img, (self.x, self.y + h))
@@ -118,6 +117,6 @@ class Survivor(Character):
 
     def cycle_weapon(self):
 
-        self.current += 1
-        self.current %= Survivor.NUMBER_OF_GUNS
+        self.current_weapon += 1
+        self.current_weapon %= Survivor.NUMBER_OF_GUNS
 
