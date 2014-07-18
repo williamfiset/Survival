@@ -8,7 +8,7 @@ __author__ = 'William Fiset, Alex Mason'
 
 
 class Bullet(pygame.Rect):
-
+    # Why this default widht and height values here?
     width, height = 7, 10
     list_ = []
 
@@ -36,11 +36,11 @@ class Bullet(pygame.Rect):
 
             self.__rotation_transformation(direction, type_)
 
-            pygame.Rect.__init__(self, x, y, Bullet.width, Bullet.height)
+            pygame.Rect.__init__(self, x, y, self.img.get_width(), self.img.get_height())
             Bullet.list_.append(self)
 
 
-    # Check if the last bullet fired was far enough from the 
+    # Check if the last bullet fired was far enough from the
     # previous bullet to shoot another one
     @staticmethod
     def __firing_rate_check(x, y, gun_type):
@@ -55,9 +55,9 @@ class Bullet(pygame.Rect):
             # Since the Bullet is either moving in the x or y plane, thus either dy or dx will be zero.
             # Grab whichever is NOT zero
             distance_to_last_bullet = max(dy, dx)
-            
+
             if gun_type == 'shotgun':
-                          
+
                 if distance_to_last_bullet < Bullet.SHOTGUN_BULLET_DISTANCE:
                     return False
 
@@ -70,10 +70,10 @@ class Bullet(pygame.Rect):
 
     # Change the image direction of the bullet
     def __rotation_transformation(self, direction, type_):
-                
+
         if direction == Direction.NORTH:
-            south = pygame.transform.rotate(Bullet._weapon_bullet_images[type_], 90)  # CCW
-            self.img = pygame.transform.flip(south, False, True)
+            # Just rotate clockwise 90 degrees is enough
+            self.img = pygame.transform.rotate(Bullet._weapon_bullet_images[type_], -90)
 
         elif direction == Direction.SOUTH:
             self.img = pygame.transform.rotate(Bullet._weapon_bullet_images[type_], 90)  # CCW
@@ -96,11 +96,10 @@ class Bullet(pygame.Rect):
         elif self.y + self.height > screen.get_height(): # down
             return True
 
-        return False 
+        return False
 
     @staticmethod
     def update(screen):
-
         for bullet in Bullet.list_:
 
             # update bullet position
@@ -122,17 +121,17 @@ class Bullet(pygame.Rect):
                     Bullet.list_.remove(bullet)
                     break
 
-            # Check if a bullet has hit a wall 
+            # Check if a bullet has hit a wall
             for tile in Tile.list_:
+                rect = pygame.Rect(bullet.x + bullet.velx, bullet.y + bullet.vely, bullet.width, bullet.height)
 
-                if bullet.colliderect(tile) and not(tile.walkable):
+                if rect.colliderect(tile) and not(tile.walkable):
 
-                    # I think the try block is because we might have already removed this bullet 
-                    # when it hit a zombie? 
+                    # I think the try block is because we might have already removed this bullet
+                    # when it hit a zombie?
                     try:
                         Bullet.list_.remove(bullet)
                     except:
-                        break  
+                        break
 
 
-                    
