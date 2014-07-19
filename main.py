@@ -49,8 +49,10 @@ screen       = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 clock        = pygame.time.Clock()
 survivor     = Survivor(Tile.TILE_SIZE * 2, Tile.TILE_SIZE * 4)
 
+avg = 0
 
 while survivor.health > 0:
+
 
     # USER INPUT
 
@@ -74,6 +76,9 @@ while survivor.health > 0:
     clock.tick(FPS)
 
     total_frames += 1
+
+
+
 
 miscellaneous.display_end_game_screen(screen, PAUSE_TIME)
 

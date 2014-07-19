@@ -19,6 +19,9 @@ class Tile(pygame.Rect):
         WALL = 'w'
 
     list_ = []
+
+    _tile_list = {}
+
     TILE_SIZE     = 32
     total_tiles   = 1
     H, V          = 1, 22
@@ -41,10 +44,13 @@ class Tile(pygame.Rect):
         
         pygame.Rect.__init__(self, (x, y), (Tile.TILE_SIZE, Tile.TILE_SIZE))
         Tile.list_.append(self)
+
+        Tile._tile_list.update( { Tile.total_tiles : self } )
         Tile.total_tiles += 1
 
     @staticmethod
     def get_tile(number):
+        # return Tile._tile_list[number]
         for tile in Tile.list_:
             if tile.number == number:
                 return tile

@@ -1,5 +1,5 @@
 import pygame
-from time import sleep
+from time import sleep, time
 
 __author__ = 'William Fiset, Gabriel Antao'
 __all__ = ['text_to_screen', 'display_health_bar', 'display_end_game_screen']
@@ -60,6 +60,31 @@ def display_end_game_screen(screen, PAUSE_TIME):
     # Actually updates the screen
     pygame.display.update()
 
+
+
+"""
+The Timer class provides an easy way to calculate: code execution time.
+
+Usage:
+
+timer = Timer()
+# Code to time
+timer.stop()
+
+"""
+
+class Timer():
+
+    def __init__(self):
+
+        self.start_time = time()
+
+    def stop(self, return_value = False):
+
+        if return_value == False:
+            print(time() - self.start_time)
+        else:
+            return (time() - self.start_time)
 
 
 
