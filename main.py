@@ -50,7 +50,18 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 clock = pygame.time.Clock()
 survivor = Survivor(Tile.TILE_SIZE * 2, Tile.TILE_SIZE * 4)
 
-
+# Displays health bar and update status
+health_bar_dark = pygame.image.load("images/other/health_bar_dark.png")
+health_bar_light = pygame.image.load("images/other/health_bar_light.png")
+def display_health_bar():
+    screen.blit(health_bar_dark, (SCREEN_WIDTH/2-50, 0))
+    screen.blit(health_bar_light,(SCREEN_WIDTH/2-50, 0),(0, 0, survivor.health/10 ,11))
+    Funk.text_to_screen(screen, 'HP:', 270, 0, color = (255,0,0))
+    if survivor.health < 150:
+        color = (255,255,0)
+    else:
+        color = (0,0,0)
+    Funk.text_to_screen(screen, str(survivor.health), SCREEN_WIDTH/2-10, 0, 10, color)
 
 # Displays the 'zombies ate your brain credits'
 def display_end_game_screen():
@@ -83,12 +94,13 @@ while survivor.health > 0:
         if tile.type == Tile.Type.FLOOR:
             screen.blit(floor_img, (tile.x, tile.y))
         elif tile.type == Tile.Type.WALL:
-            screen.blit(wall_img, (tile.x, tile.y)) 
+            screen.blit(wall_img, (tile.x, tile.y))
 
     Bullet.update(screen)
     Zombie.update(screen, survivor)
     survivor.draw(screen)
-    Funk.text_to_screen(screen, 'Health: {0}'.format(survivor.health), 0, 0)
+    display_health_bar()
+
 
     pygame.display.flip()
 
