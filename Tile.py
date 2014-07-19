@@ -10,6 +10,9 @@ import pygame
 
 class Tile(pygame.Rect):
 
+    floor_tile_img = pygame.image.load('images/tiles/surface_tile_gray.png')
+    wall_tile_img = pygame.image.load("images/tiles/dark_wall.png")
+
     # Define all the different kinds of tiles that exist
     class Type:
         FLOOR = '-'
@@ -46,6 +49,15 @@ class Tile(pygame.Rect):
             if tile.number == number:
                 return tile
 
+    @staticmethod
+    def update(screen):
+
+        for tile in Tile.list_:
+            if tile.type == Tile.Type.FLOOR:
+                screen.blit(Tile.floor_tile_img, (tile.x, tile.y))
+
+            elif tile.type == Tile.Type.WALL:
+                screen.blit(Tile.wall_tile_img, (tile.x, tile.y))
 
 
 
