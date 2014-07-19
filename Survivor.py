@@ -67,7 +67,7 @@ class Survivor(Character):
                 self.dx, self.dy = 0, 0
 
     def draw(self, screen):
-
+    # weapond position ajusted
         img = Survivor.GUN_IMAGES[self.current_weapon]
 
         if self.direction == Direction.WEST:
@@ -83,7 +83,7 @@ class Survivor(Character):
             screen.blit(self.img, (self.x, self.y))
             img = pygame.transform.rotate(img, 90)  # CCW
             screen.blit(img, (self.centerx, self.centery))
-
+        # weapon drawed below survivor
         elif self.direction == Direction.NORTH:
             south = pygame.transform.rotate(img, 90)
             img = pygame.transform.flip(south, False, True)
