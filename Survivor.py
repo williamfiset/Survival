@@ -60,39 +60,37 @@ class Survivor(Character):
             if y_destination > 0:  # up
                 self.y -= Survivor._velocity
 
-            elif y_destination < 0:  # dopwn
+            elif y_destination < 0:  # down
                 self.y += Survivor._velocity
 
             if x_destination == 0 and y_destination == 0:
                 self.dx, self.dy = 0, 0
 
     def draw(self, screen):
-    # weapond position ajusted
-        img = Survivor.GUN_IMAGES[self.current_weapon]
+
+        gun_img = Survivor.GUN_IMAGES[self.current_weapon]
 
         if self.direction == Direction.WEST:
-            screen.blit(self.img, (self.x, self.y))
-            screen.blit(img, (self.centerx - img.get_rect().width, self.centery))
+            screen.blit(gun_img, (self.centerx - gun_img.get_rect().width, self.centery))
 
         elif self.direction == Direction.EAST:
-            screen.blit(self.img, (self.x, self.y))
-            img = pygame.transform.flip(img, True, False)
-            screen.blit(img, (self.centerx, self.centery))
+            gun_img = pygame.transform.flip(gun_img, True, False)
+            screen.blit(gun_img, (self.centerx, self.centery))
 
         elif self.direction == Direction.SOUTH:
-            screen.blit(self.img, (self.x, self.y))
-            img = pygame.transform.rotate(img, 90)  # CCW
-            screen.blit(img, (self.centerx, self.centery))
-        # weapon drawed below survivor
+            gun_img = pygame.transform.rotate(gun_img, 90)  # CCW
+            screen.blit(gun_img, (self.centerx, self.centery))
+        
+        # weapon drawn below survivor
         elif self.direction == Direction.NORTH:
-            south = pygame.transform.rotate(img, 90)
-            img = pygame.transform.flip(south, False, True)
-            screen.blit(img, (self.centerx, self.centery - img.get_rect().height))
-            screen.blit(self.img, (self.x, self.y))
+            south = pygame.transform.rotate(gun_img, 90)
+            gun_img = pygame.transform.flip(south, False, True)
+            screen.blit(gun_img, (self.centerx, self.centery - gun_img.get_rect().height))
+
+        screen.blit(self.img, (self.x, self.y))
 
 
-
-    """ Changes player direction iamge"""
+    """ Changes player direction image"""
     def rotate(self, direction):
 
         path = 'images/survivor/survivor_'
