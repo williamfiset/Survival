@@ -88,24 +88,27 @@ class EventResponder:
 
         """ Character firing Bullet with arrow keys  """
 
+        bullet_velocity = survivor.current_weapon.bullet_velocity
+        print bullet_velocity
+
         if keys[pygame.K_LEFT]:
             survivor.rotate(Direction.WEST)
-            Bullet(survivor.centerx, survivor.centery, -10, 0,
+            Bullet(survivor.centerx, survivor.centery, -bullet_velocity, 0,
                 Direction.WEST, survivor.get_bullet_type_based_on_weapon())
 
         elif keys[pygame.K_RIGHT]:
             survivor.rotate(Direction.EAST)
-            Bullet(survivor.centerx, survivor.centery, 10, 0,
+            Bullet(survivor.centerx, survivor.centery, bullet_velocity, 0,
                 Direction.EAST, survivor.get_bullet_type_based_on_weapon())
 
         elif keys[pygame.K_UP]:
             survivor.rotate(Direction.NORTH)
-            Bullet(survivor.centerx, survivor.centery, 0, -10,
+            Bullet(survivor.centerx, survivor.centery, 0, -bullet_velocity,
                 Direction.NORTH, survivor.get_bullet_type_based_on_weapon())
 
         elif keys[pygame.K_DOWN]:
             survivor.rotate(Direction.SOUTH)
-            Bullet(survivor.centerx, survivor.centery, 0, 10,
+            Bullet(survivor.centerx, survivor.centery, 0, bullet_velocity,
                 Direction.SOUTH, survivor.get_bullet_type_based_on_weapon())
 
 
