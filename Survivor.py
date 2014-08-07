@@ -5,6 +5,7 @@ The Survivor file contorls the survivor and his or her movement and actions.
 import pygame
 from Character import Character
 from Character import Direction
+from Weapon import Weapon
 
 
 __author__ = 'William Fiset, Alex Mason'
@@ -14,17 +15,12 @@ class Survivor(Character):
 
     _velocity = 8
 
-    GUN_IMAGES = [pygame.image.load('images/weapon/pistol.png'),
-                pygame.image.load('images/weapon/shotgun.png'),
-                pygame.image.load('images/weapon/automatic.png')]
-
-    NUMBER_OF_GUNS = len(GUN_IMAGES)
     START_HEALTH = 1000
 
     def __init__(self, x, y):
 
         self.health = Survivor.START_HEALTH
-        self.current_weapon = 0  # 0 -> pistol, 1 -> shotgun, 2 -> automatic
+        self.current_weapon = Weapon(Weapon.PISTOL) 
         self.direction = Direction.WEST
         self.img = pygame.image.load('images/survivor/survivor_w.png')
 
@@ -32,12 +28,8 @@ class Survivor(Character):
 
     def get_bullet_type_based_on_weapon(self):
 
-        if self.current_weapon == 0:
-            return 'pistol'
-        elif self.current_weapon == 1:
-            return 'shotgun'
-        elif self.current_weapon == 2:
-            return 'automatic'
+        return self.current_weapon.weapon_type
+
 
     """
     movement determines if the player should move,
@@ -68,7 +60,7 @@ class Survivor(Character):
 
     def draw(self, screen):
 
-        gun_img = Survivor.GUN_IMAGES[self.current_weapon]
+        gun_img = Weapon.get_weapon_image( self.current_weapon )
 
         if self.direction == Direction.WEST:
             screen.blit(gun_img, (self.centerx - gun_img.get_rect().width, self.centery))
@@ -116,8 +108,26 @@ class Survivor(Character):
                 self.direction = Direction.WEST
                 self.img = pygame.image.load(path + self.direction + png)
 
+    # Cycle through the weapons 
     def cycle_weapon(self):
 
-        self.current_weapon += 1
-        self.current_weapon %= Survivor.NUMBER_OF_GUNS
+        if self.current_weapon.weapon_type == Weapon.PISTOL:
+            self.current_weapon = Weapon(Weapon.SHOTGUN)
+
+        elif self.current_weapon.weapon_type == Weapon.SHOTGUN:
+            self.current_weapon = Weapon(Weapon.AUTOMATIC)
+
+        elif self.current_weapon.weapon_type == Weapon.AUTOMATIC:
+            self.current_weapon = Weapon(Weapon.PISTOL)
+        
+
+
+
+
+
+
+
+
+
+
 
