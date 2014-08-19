@@ -1,7 +1,17 @@
-Survival
-========
 
-Zombie Survival Game
+Running Application 
+============
+
+First make sure you have the following dependencies installed
+
+1. Python 2.x (Not tested with Python 3)
+2. Pygame framework (http://pygame.org/download.shtml)
+
+After that simply launch the main.py script to execute the program:
+
+``` python
+$ python main.py
+```
 
 
 Contributing
@@ -25,23 +35,6 @@ If you're new to GitHub but want to contribute anyways I suggest  you start look
 oneline tutorial such as this one to get you started:
 
 http://rypress.com/tutorials/git/index.html
-
-
-Running Game
-============
-
-First make sure you have the following dependancies installed
-
-1. Python 2.x (Not tested with Python 3)
-2. Pygame framework (http://pygame.org/download.shtml)
-
-After that simply run the main.py script:
-
-``` python
-$ python main.py
-```
-
-
 
 
 
