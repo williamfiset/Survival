@@ -30,7 +30,8 @@ http://rypress.com/tutorials/git/index.html
 Running Game
 ============
 
-First make sure you have the following dependancies installed:
+First make sure you have the following dependancies installed
+
 1. Python 2.x (Not tested with Python 3)
 2. Pygame framework (http://pygame.org/download.shtml)
 
