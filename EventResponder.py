@@ -89,7 +89,6 @@ class EventResponder:
         """ Character firing Bullet with arrow keys  """
 
         bullet_velocity = survivor.current_weapon.bullet_velocity
-        print bullet_velocity
 
         if keys[pygame.K_LEFT]:
             survivor.rotate(Direction.WEST)
