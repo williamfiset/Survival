@@ -49,7 +49,7 @@ def create_world(world_text_file):
 				errorStr = "\n\nCharacter '{0}' is not defined in Tile.Type.* \n"
 				raise CharacterNotDefined(errorStr.format(character))
 
-	print WORLD_WIDTH, WORLD_HEIGHT
+	print (WORLD_WIDTH, WORLD_HEIGHT)
 
 	# Might not be a bad idea to close a file after you open it ;P
 	map_.close()
